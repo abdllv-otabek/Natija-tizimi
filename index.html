@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amerika maktabi — Natijalar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1E2A4A;
+    --navy-dark:#141B33;
+    --teal:#1F9C8C;
+    --gold:#C98A2C;
+    --bg:#F5F6F8;
+    --surface:#FFFFFF;
+    --border:#E4E7EC;
+    --text:#1E2233;
+    --text-muted:#6B7180;
+    --good:#2E9E5B;
+    --mid:#D6A419;
+    --low:#D6473C;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    min-height:100vh;
+  }
+  h1,h2,h3,.display{font-family:'Manrope',system-ui,sans-serif;}
+  a{color:inherit;}
+  button{font-family:inherit;cursor:pointer;}
+
+  /* ---------- header ---------- */
+  header.topbar{
+    background:var(--navy);
+    color:#fff;
+    padding:18px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  header.topbar .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Manrope',sans-serif;
+    font-weight:800;
+    font-size:19px;
+    cursor:pointer;
+  }
+  header.topbar .brand .mark{
+    width:34px;height:34px;border-radius:9px;
+    background:var(--teal);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:16px;color:#fff;
+  }
+  nav.topnav{display:flex;gap:8px;}
+  nav.topnav button{
+    background:rgba(255,255,255,0.08);
+    color:#fff;
+    border:1px solid rgba(255,255,255,0.18);
+    padding:9px 16px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:600;
+    transition:background .15s;
+  }
+  nav.topnav button:hover{background:rgba(255,255,255,0.18);}
+  nav.topnav button.active{background:var(--teal);border-color:var(--teal);}
+
+  main{max-width:960px;margin:0 auto;padding:28px 20px 80px;}
+
+  /* ---------- search ---------- */
+  .search-wrap{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin-bottom:26px;
+    box-shadow:0 1px 2px rgba(20,27,51,0.03);
+  }
+  .search-wrap input{
+    flex:1;
+    border:none;
+    outline:none;
+    font-size:15px;
+    font-family:inherit;
+    background:transparent;
+    color:var(--text);
+  }
+  .search-wrap svg{flex-shrink:0;color:var(--text-muted);}
+  .search-results{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    margin:-16px 0 26px;
+    overflow:hidden;
+  }
+  .search-results .sr-item{
+    padding:12px 16px;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+  }
+  .search-results .sr-item:hover{background:var(--bg);}
+  .search-results .sr-item small{color:var(--text-muted);}
+
+  /* ---------- breadcrumb ---------- */
+  .crumbs{
+    display:flex;
+    gap:6px;
+    align-items:center;
+    font-size:13px;
+    color:var(--text-muted);
+    margin-bottom:18px;
+    flex-wrap:wrap;
+  }
+  .crumbs span.link{color:var(--teal);cursor:pointer;font-weight:600;}
+  .crumbs span.sep{opacity:.5;}
+
+  /* ---------- cards / grid ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px;
+    cursor:pointer;
+    transition:transform .12s, box-shadow .12s, border-color .12s;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(20,27,51,0.08);border-color:var(--teal);}
+  .card .name{font-weight:700;font-size:16px;margin-bottom:4px;}
+  .card .meta{color:var(--text-muted);font-size:13px;}
+  .teacher-avatar{
+    width:40px;height:40px;border-radius:10px;
+    background:var(--navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:15px;margin-bottom:10px;
+  }
+  .badge{
+    display:inline-block;font-size:11px;font-weight:700;
+    padding:3px 9px;border-radius:999px;
+    background:rgba(31,156,140,0.12);color:var(--teal);
+    margin-top:6px;
+  }
+
+  /* ---------- filters ---------- */
+  .filters{
+    display:flex;gap:10px;flex-wrap:wrap;align-items:end;
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:14px 16px;margin-bottom:20px;
+  }
+  .filters .field{display:flex;flex-direction:column;gap:5px;}
+  .filters label{font-size:12px;color:var(--text-muted);font-weight:600;}
+  .filters input, .filters select{
+    border:1px solid var(--border);border-radius:8px;padding:8px 10px;
+    font-family:inherit;font-size:14px;background:#fff;color:var(--text);
+  }
+  .filters button.apply{
+    background:var(--navy);color:#fff;border:none;border-radius:8px;
+    padding:9px 16px;font-weight:600;font-size:14px;
+  }
+
+  /* ---------- result type tabs ---------- */
+  .tabs{display:flex;gap:6px;margin-bottom:16px;}
+  .tabs button{
+    background:var(--surface);border:1px solid var(--border);
+    padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;
+    color:var(--text-muted);
+  }
+  .tabs button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  /* ---------- student list ---------- */
+  .student-block{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:16px;margin-bottom:12px;
+  }
+  .student-block .sname{font-weight:700;margin-bottom:10px;}
+  table.results-table{width:100%;border-collapse:collapse;font-size:14px;}
+  table.results-table th{
+    text-align:left;color:var(--text-muted);font-weight:600;font-size:12px;
+    padding:6px 8px;border-bottom:1px solid var(--border);
+  }
+  table.results-table td{padding:7px 8px;border-bottom:1px solid var(--border);}
+  table.results-table tr:last-child td{border-bottom:none;}
+  .empty-note{color:var(--text-muted);font-size:13px;padding:6px 8px;}
+
+  .pill-score{
+    display:inline-block;min-width:34px;text-align:center;
+    padding:3px 8px;border-radius:999px;font-weight:700;font-size:13px;color:#fff;
+  }
+  .pill-good{background:var(--good);}
+  .pill-mid{background:var(--mid);}
+  .pill-low{background:var(--low);}
+
+  .bar-wrap{display:flex;align-items:center;gap:8px;}
+  .bar-track{flex:1;height:8px;background:var(--border);border-radius:99px;overflow:hidden;max-width:140px;}
+  .bar-fill{height:100%;border-radius:99px;background:var(--teal);}
+
+  /* ---------- login ---------- */
+  .login-card{
+    max-width:360px;margin:40px auto;background:var(--surface);
+    border:1px solid var(--border);border-radius:var(--radius);
+    padding:30px 26px;
+  }
+  .login-card h2{margin-top:0;}
+  .login-card .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+  .login-card label{font-size:13px;font-weight:600;color:var(--text-muted);}
+  .login-card input{
+    border:1px solid var(--border);border-radius:9px;padding:10px 12px;
+    font-family:inherit;font-size:14px;
+  }
+  .login-card button.submit{
+    width:100%;background:var(--navy);color:#fff;border:none;
+    border-radius:9px;padding:11px;font-weight:700;font-size:14px;margin-top:6px;
+  }
+  .error-msg{color:var(--low);font-size:13px;margin-top:10px;}
+
+  /* ---------- dashboard ---------- */
+  .dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
+  .dash-header .who{font-size:14px;color:var(--text-muted);}
+  .dash-header .who b{color:var(--text);}
+  .logout-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--text-muted);}
+
+  .entry-panel{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:20px;margin-bottom:20px;
+  }
+  .entry-panel h3{margin-top:0;margin-bottom:14px;}
+  .entry-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .entry-form .full{grid-column:1/-1;}
+  .entry-form .field{display:flex;flex-direction:column;gap:5px;}
+  .entry-form label{font-size:12px;font-weight:600;color:var(--text-muted);}
+  .entry-form input, .entry-form select{
+    border:1px solid var(--border);border-radius:8px;padding:9px 10px;
+    font-family:inherit;font-size:14px;
+  }
+  .entry-form button.save{
+    grid-column:1/-1;background:var(--teal);color:#fff;border:none;
+    border-radius:8px;padding:11px;font-weight:700;font-size:14px;margin-top:4px;
+  }
+  .save-msg{grid-column:1/-1;font-size:13px;color:var(--good);font-weight:600;}
+
+  .recent-list{margin-top:10px;}
+  .recent-item{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:9px 10px;border-bottom:1px solid var(--border);font-size:13px;
+  }
+  .recent-item:last-child{border-bottom:none;}
+  .recent-item .del{background:none;border:none;color:var(--low);font-weight:700;font-size:13px;}
+
+  .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--text-muted);margin:22px 0 10px;}
+
+  .loading-note, .empty-state{text-align:center;color:var(--text-muted);padding:40px 10px;font-size:14px;}
+
+  @media (max-width:640px){
+    .entry-form{grid-template-columns:1fr;}
+    main{padding:20px 14px 60px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand" onclick="goHome()">
+    <div class="mark">TA</div>
+    <span>Amerika maktabi</span>
+  </div>
+  <nav class="topnav">
+    <button id="navPublic" class="active" onclick="goHome()">Natijalar</button>
+    <button id="navTeacher" onclick="goTeacherArea()">O'qituvchi kirishi</button>
+  </nav>
+</header>
+
+<main id="app">
+  <div class="loading-note">Yuklanmoqda...</div>
+</main>
+
+<script>
+/* =======================================================================
+   CONFIG — put your Apps Script Web App URL here (see README.md)
+   ======================================================================= */
+const CONFIG = {
+  APPS_SCRIPT_URL: 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE'
+};
+
+/* =======================================================================
+   STATE
+   ======================================================================= */
+let DATA = null; // { teachers, groups, students, homework, unitTests, levelTests }
+let VIEW = { screen: 'home' }; // current screen + params
+let AUTH = JSON.parse(sessionStorage.getItem('ta_auth') || 'null'); // {teacherId, teacherName, loginName, role, username, password}
+
+const app = document.getElementById('app');
+
+/* =======================================================================
+   DATA LOADING
+   ======================================================================= */
+async function loadData() {
+  const res = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=getData`);
+  const json = await res.json();
+  if (!json.success) throw new Error(json.error || 'Ma\'lumotni olishda xatolik');
+  DATA = json.data;
+}
+
+async function apiPost(payload) {
+  const res = await fetch(CONFIG.APPS_SCRIPT_URL, {
+    method: 'POST',
+    // text/plain avoids a CORS preflight against Apps Script
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  });
+  return res.json();
+}
+
+/* =======================================================================
+   NAV HELPERS
+   ======================================================================= */
+function goHome() {
+  document.getElementById('navPublic').classList.add('active');
+  document.getElementById('navTeacher').classList.remove('active');
+  VIEW = { screen: 'home' };
+  render();
+}
+function goTeacherArea() {
+  document.getElementById('navPublic').classList.remove('active');
+  document.getElementById('navTeacher').classList.add('active');
+  VIEW = { screen: AUTH ? 'dashboard' : 'login' };
+  render();
+}
+function openTeacher(teacherId) {
+  VIEW = { screen: 'teacherGroups', teacherId };
+  render();
+}
+function openGroup(groupId) {
+  VIEW = { screen: 'groupResults', groupId, tab: 'homework', from: '', to: '' };
+  render();
+}
+function openStudentFromSearch(studentId) {
+  const student = DATA.students.find(s => String(s.student_id) === String(studentId));
+  if (!student) return;
+  VIEW = { screen: 'groupResults', groupId: student.group_id, tab: 'homework', from: '', to: '', highlight: studentId };
+  render();
+}
+
+/* =======================================================================
+   RENDER ROOT
+   ======================================================================= */
+function render() {
+  if (!DATA) { app.innerHTML = `<div class="loading-note">Yuklanmoqda...</div>`; return; }
+  if (VIEW.screen === 'home') return renderHome();
+  if (VIEW.screen === 'teacherGroups') return renderTeacherGroups();
+  if (VIEW.screen === 'groupResults') return renderGroupResults();
+  if (VIEW.screen === 'login') return renderLogin();
+  if (VIEW.screen === 'dashboard') return renderDashboard();
+}
+
+/* =======================================================================
+   PUBLIC: HOME (search + teacher list)
+   ======================================================================= */
+function renderHome() {
+  app.innerHTML = `
+    <div class="search-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="searchInput" type="text" placeholder="O'quvchi ismini kiriting..." autocomplete="off">
+    </div>
+    <div id="searchResultsWrap"></div>
+    <div id="teacherListWrap"></div>
+  `;
+  document.getElementById('searchInput').addEventListener('input', onSearchInput);
+  renderTeacherList();
+}
+
+function renderTeacherList() {
+  const wrap = document.getElementById('teacherListWrap');
+  if (!DATA.teachers.length) {
+    wrap.innerHTML = `<div class="empty-state">Hozircha o'qituvchilar qo'shilmagan.</div>`;
+    return;
+  }
+  wrap.innerHTML = `
+    <div class="section-title">O'qituvchilar</div>
+    <div class="grid">
+      ${DATA.teachers.map(t => {
+        const groupCount = DATA.groups.filter(g => String(g.teacher_id) === String(t.teacher_id)).length;
+        const initials = (t.display_name || '?').split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase();
+        return `
+          <div class="card" onclick="openTeacher('${t.teacher_id}')">
+            <div class="teacher-avatar">${initials}</div>
+            <div class="name">${escapeHtml(t.display_name)}</div>
+            <div class="meta">${groupCount} ta guruh</div>
+          </div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+function onSearchInput(e) {
+  const q = e.target.value.trim().toLowerCase();
+  const wrap = document.getElementById('searchResultsWrap');
+  const teacherListWrap = document.getElementById('teacherListWrap');
+  if (!q) { wrap.innerHTML = ''; teacherListWrap.style.display = ''; return; }
+  teacherListWrap.style.display = 'none';
+  const matches = DATA.students.filter(s => (s.full_name || '').toLowerCase().includes(q));
+  if (!matches.length) {
+    wrap.innerHTML = `<div class="empty-state">O'quvchi topilmadi.</div>`;
+    return;
+  }
+  wrap.innerHTML = `
+    <div class="search-results">
+      ${matches.map(s => {
+        const group = DATA.groups.find(g => String(g.group_id) === String(s.group_id));
+        const teacher = group ? DATA.teachers.find(t => String(t.teacher_id) === String(group.teacher_id)) : null;
+        return `
+          <div class="sr-item" onclick="openStudentFromSearch('${s.student_id}')">
+            <span>${escapeHtml(s.full_name)}</span>
+            <small>${teacher ? escapeHtml(teacher.display_name) : ''}${group ? ' · ' + escapeHtml(group.level) + ' ' + escapeHtml(group.schedule_code) : ''}</small>
+          </div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+/* =======================================================================
+   PUBLIC: TEACHER'S GROUPS
+   ======================================================================= */
+function renderTeacherGroups() {
+  const teacher = DATA.teachers.find(t => String(t.teacher_id) === String(VIEW.teacherId));
+  const groups = DATA.groups.filter(g => String(g.teacher_id) === String(VIEW.teacherId));
+  app.innerHTML = `
+    <div class="crumbs">
+      <span class="link" onclick="goHome()">O'qituvchilar</span>
+      <span class="sep">/</span>
+      <span>${escapeHtml(teacher ? teacher.display_name : '')}</span>
+    </div>
+    <h2 style="margin-top:0">${escapeHtml(teacher ? teacher.display_name : '')}</h2>
+    ${groups.length ? `<div class="grid">
+      ${groups.map(g => `
+        <div class="card" onclick="openGroup('${g.group_id}')">
+          <div class="name">${escapeHtml(g.level)}</div>
+          <div class="meta">${escapeHtml(g.schedule_label || g.schedule_code)} · ${escapeHtml(g.time || '')}</div>
+          <span class="badge">${escapeHtml(g.schedule_code)}</span>
+        </div>
+      `).join('')}
+    </div>` : `<div class="empty-state">Bu o'qituvchida hozircha guruh yo'q.</div>`}
+  `;
+}
+
+/* =======================================================================
+   PUBLIC: GROUP RESULTS (with filters + tabs)
+   ======================================================================= */
+function renderGroupResults() {
+  const group = DATA.groups.find(g => String(g.group_id) === String(VIEW.groupId));
+  const teacher = group ? DATA.teachers.find(t => String(t.teacher_id) === String(group.teacher_id)) : null;
+  const students = DATA.students.filter(s => String(s.group_id) === String(VIEW.groupId));
+
+  app.innerHTML = `
+    <div class="crumbs">
+      <span class="link" onclick="goHome()">O'qituvchilar</span>
+      <span class="sep">/</span>
+      <span class="link" onclick="openTeacher('${teacher ? teacher.teacher_id : ''}')">${escapeHtml(teacher ? teacher.display_name : '')}</span>
+      <span class="sep">/</span>
+      <span>${escapeHtml(group ? group.level : '')} ${escapeHtml(group ? group.schedule_code : '')}</span>
+    </div>
+    <h2 style="margin-top:0">${escapeHtml(group ? group.level : '')} — ${escapeHtml(group ? (group.schedule_label || group.schedule_code) : '')}</h2>
+
+    <div class="tabs">
+      <button data-tab="homework" class="${VIEW.tab==='homework'?'active':''}">Uy vazifasi</button>
+      <button data-tab="unit" class="${VIEW.tab==='unit'?'active':''}">Modul testlari</button>
+      <button data-tab="level" class="${VIEW.tab==='level'?'active':''}">Daraja testlari</button>
+    </div>
+
+    <div class="filters">
+      <div class="field"><label>Boshlanish sanasi</label><input type="date" id="filterFrom" value="${VIEW.from}"></div>
+      <div class="field"><label>Tugash sanasi</label><input type="date" id="filterTo" value="${VIEW.to}"></div>
+      <button class="apply" id="applyFilter">Filtrlash</button>
+    </div>
+
+    <div id="studentResultsWrap"></div>
+  `;
+
+  app.querySelectorAll('.tabs button').forEach(btn => {
+    btn.addEventListener('click', () => { VIEW.tab = btn.dataset.tab; render(); });
+  });
+  document.getElementById('applyFilter').addEventListener('click', () => {
+    VIEW.from = document.getElementById('filterFrom').value;
+    VIEW.to = document.getElementById('filterTo').value;
+    renderStudentResults(students);
+  });
+
+  renderStudentResults(students);
+}
+
+function inRange(dateStr, from, to) {
+  if (!dateStr) return false;
+  if (from && dateStr < from) return false;
+  if (to && dateStr > to) return false;
+  return true;
+}
+
+function scoreClass(score) {
+  const n = Number(score);
+  if (n >= 80) return 'pill-good';
+  if (n >= 60) return 'pill-mid';
+  return 'pill-low';
+}
+
+function renderStudentResults(students) {
+  const wrap = document.getElementById('studentResultsWrap');
+  if (!students.length) {
+    wrap.innerHTML = `<div class="empty-state">Bu guruhda hozircha o'quvchi yo'q.</div>`;
+    return;
+  }
+  const { tab, from, to } = VIEW;
+
+  wrap.innerHTML = students.map(s => {
+    let bodyHtml = '';
+    if (tab === 'homework') {
+      const rows = DATA.homework.filter(h => String(h.student_id) === String(s.student_id) && inRange(h.date, from, to))
+        .sort((a,b)=> a.date < b.date ? 1 : -1);
+      bodyHtml = rows.length ? `
+        <table class="results-table">
+          <thead><tr><th>Sana</th><th>Bajarilgan</th></tr></thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr>
+                <td>${formatDate(r.date)}</td>
+                <td>
+                  <div class="bar-wrap">
+                    <div class="bar-track"><div class="bar-fill" style="width:${Math.min(100, Number(r.percent_completed)||0)}%"></div></div>
+                    <span>${escapeHtml(String(r.percent_completed))}%</span>
+                  </div>
+                </td>
+              </tr>`).join('')}
+          </tbody>
+        </table>` : `<div class="empty-note">Bu oraliqda uy vazifa natijalari yo'q.</div>`;
+    } else if (tab === 'unit') {
+      const rows = DATA.unitTests.filter(h => String(h.student_id) === String(s.student_id) && inRange(h.date, from, to))
+        .sort((a,b)=> a.date < b.date ? 1 : -1);
+      bodyHtml = rows.length ? `
+        <table class="results-table">
+          <thead><tr><th>Sana</th><th>Modul</th><th>Ball</th></tr></thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr>
+                <td>${formatDate(r.date)}</td>
+                <td>${escapeHtml(r.unit_name || '')}</td>
+                <td><span class="pill-score ${scoreClass(r.score)}">${escapeHtml(String(r.score))}</span></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>` : `<div class="empty-note">Bu oraliqda modul test natijalari yo'q.</div>`;
+    } else {
+      const rows = DATA.levelTests.filter(h => String(h.student_id) === String(s.student_id) && inRange(h.date, from, to))
+        .sort((a,b)=> a.date < b.date ? 1 : -1);
+      bodyHtml = rows.length ? `
+        <table class="results-table">
+          <thead><tr><th>Sana</th><th>Daraja</th><th>Ball</th></tr></thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr>
+                <td>${formatDate(r.date)}</td>
+                <td>${escapeHtml(r.level_name || '')}</td>
+                <td><span class="pill-score ${scoreClass(r.score)}">${escapeHtml(String(r.score))}</span></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>` : `<div class="empty-note">Bu oraliqda daraja test natijalari yo'q.</div>`;
+    }
+
+    const isHighlighted = VIEW.highlight && String(VIEW.highlight) === String(s.student_id);
+    return `
+      <div class="student-block" style="${isHighlighted ? 'border-color:var(--teal);box-shadow:0 0 0 2px rgba(31,156,140,0.25);' : ''}">
+        <div class="sname">${escapeHtml(s.full_name)}</div>
+        ${bodyHtml}
+      </div>
+    `;
+  }).join('');
+}
+
+/* =======================================================================
+   TEACHER LOGIN
+   ======================================================================= */
+function renderLogin() {
+  app.innerHTML = `
+    <div class="login-card">
+      <h2>O'qituvchi kirishi</h2>
+      <div class="field">
+        <label>Foydalanuvchi nomi</label>
+        <input id="loginUser" type="text" autocomplete="username">
+      </div>
+      <div class="field">
+        <label>Parol</label>
+        <input id="loginPass" type="password" autocomplete="current-password">
+      </div>
+      <button class="submit" id="loginBtn">Kirish</button>
+      <div id="loginError"></div>
+    </div>
+  `;
+  document.getElementById('loginBtn').addEventListener('click', doLogin);
+  document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+}
+
+async function doLogin() {
+  const username = document.getElementById('loginUser').value.trim();
+  const password = document.getElementById('loginPass').value;
+  const errEl = document.getElementById('loginError');
+  errEl.innerHTML = '';
+  if (!username || !password) {
+    errEl.innerHTML = `<div class="error-msg">Iltimos, login va parolni kiriting.</div>`;
+    return;
+  }
+  const btn = document.getElementById('loginBtn');
+  btn.textContent = 'Tekshirilmoqda...';
+  try {
+    const res = await apiPost({ action: 'login', username, password });
+    if (!res.success) {
+      errEl.innerHTML = `<div class="error-msg">Login yoki parol noto'g'ri.</div>`;
+      btn.textContent = 'Kirish';
+      return;
+    }
+    AUTH = {
+      teacherId: res.account.teacherId,
+      teacherName: res.account.teacherName,
+      loginName: res.account.loginName,
+      role: res.account.role,
+      username, password
+    };
+    sessionStorage.setItem('ta_auth', JSON.stringify(AUTH));
+    VIEW = { screen: 'dashboard' };
+    render();
+  } catch (err) {
+    errEl.innerHTML = `<div class="error-msg">Xatolik yuz berdi. Qayta urinib ko'ring.</div>`;
+    btn.textContent = 'Kirish';
+  }
+}
+
+function logout() {
+  AUTH = null;
+  sessionStorage.removeItem('ta_auth');
+  VIEW = { screen: 'login' };
+  render();
+}
+
+/* =======================================================================
+   TEACHER DASHBOARD
+   ======================================================================= */
+let DASH = { groupId: null, studentId: null, entryTab: 'homework' };
+let ADMIN = { teacherId: null, groupId: null, studentId: null };
+
+function renderDashboard() {
+  if (AUTH.role === 'admin') return renderAdminPanel();
+
+  const groups = DATA.groups.filter(g => String(g.teacher_id) === String(AUTH.teacherId));
+  if (!DASH.groupId && groups.length) DASH.groupId = groups[0].group_id;
+  const students = DATA.students.filter(s => String(s.group_id) === String(DASH.groupId));
+  if (!DASH.studentId && students.length) DASH.studentId = students[0].student_id;
+
+  app.innerHTML = `
+    <div class="dash-header">
+      <div class="who">Xush kelibsiz, <b>${escapeHtml(AUTH.teacherName)}</b> ${AUTH.role === 'assistant' ? '(yordamchi)' : ''}</div>
+      <button class="logout-btn" onclick="logout()">Chiqish</button>
+    </div>
+
+    <div class="entry-panel">
+      <h3>Natija kiritish</h3>
+      <div class="entry-form">
+        <div class="field">
+          <label>Guruh</label>
+          <select id="dashGroup">
+            ${groups.map(g => `<option value="${g.group_id}" ${String(g.group_id)===String(DASH.groupId)?'selected':''}>${escapeHtml(g.level)} — ${escapeHtml(g.schedule_label || g.schedule_code)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field">
+          <label>O'quvchi</label>
+          <select id="dashStudent">
+            ${students.map(s => `<option value="${s.student_id}" ${String(s.student_id)===String(DASH.studentId)?'selected':''}>${escapeHtml(s.full_name)}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+
+      <div class="tabs" style="margin-top:16px;">
+        <button data-etab="homework" class="${DASH.entryTab==='homework'?'active':''}">Uy vazifasi</button>
+        <button data-etab="unit" class="${DASH.entryTab==='unit'?'active':''}">Modul test</button>
+        <button data-etab="level" class="${DASH.entryTab==='level'?'active':''}">Daraja test</button>
+      </div>
+
+      <div id="entryFormWrap" style="margin-top:14px;"></div>
+    </div>
+
+    <div class="section-title">So'nggi yozuvlar</div>
+    <div class="entry-panel" style="padding-top:10px;">
+      <div class="recent-list" id="recentList"></div>
+    </div>
+  `;
+
+  document.getElementById('dashGroup').addEventListener('change', e => {
+    DASH.groupId = e.target.value;
+    DASH.studentId = null;
+    render();
+  });
+  document.getElementById('dashStudent').addEventListener('change', e => {
+    DASH.studentId = e.target.value;
+    render();
+  });
+  app.querySelectorAll('[data-etab]').forEach(btn => {
+    btn.addEventListener('click', () => { DASH.entryTab = btn.dataset.etab; render(); });
+  });
+
+  renderEntryForm();
+  renderRecentList();
+}
+
+function renderAdminPanel() {
+  if (!ADMIN.teacherId && DATA.teachers.length) ADMIN.teacherId = DATA.teachers[0].teacher_id;
+  const groupsForTeacher = DATA.groups.filter(g => String(g.teacher_id) === String(ADMIN.teacherId));
+  if (!ADMIN.groupId || !groupsForTeacher.some(g => String(g.group_id) === String(ADMIN.groupId))) {
+    ADMIN.groupId = groupsForTeacher.length ? groupsForTeacher[0].group_id : null;
+  }
+  const studentsForGroup = DATA.students.filter(s => String(s.group_id) === String(ADMIN.groupId));
+  if (!ADMIN.studentId || !studentsForGroup.some(s => String(s.student_id) === String(ADMIN.studentId))) {
+    ADMIN.studentId = studentsForGroup.length ? studentsForGroup[0].student_id : null;
+  }
+
+  app.innerHTML = `
+    <div class="dash-header">
+      <div class="who">Xush kelibsiz, <b>${escapeHtml(AUTH.teacherName || AUTH.loginName)}</b> (admin)</div>
+      <button class="logout-btn" onclick="logout()">Chiqish</button>
+    </div>
+
+    <div class="entry-panel">
+      <h3>Yangi o'qituvchi qo'shish</h3>
+      <div class="entry-form">
+        <div class="field full">
+          <label>Ism familiya</label>
+          <input type="text" id="at_name" placeholder="masalan: Nilufar Karimova">
+        </div>
+        <div class="field">
+          <label>Foydalanuvchi nomi</label>
+          <input type="text" id="at_user" placeholder="masalan: nilufar">
+        </div>
+        <div class="field">
+          <label>Parol</label>
+          <input type="text" id="at_pass" placeholder="masalan: pass123">
+        </div>
+        <button class="save" id="at_save">Qo'shish</button>
+        <div id="at_msg" class="full"></div>
+      </div>
+    </div>
+
+    <div class="section-title">Mavjud o'qituvchilar</div>
+    <div class="entry-panel" style="padding-top:10px;">
+      <div id="teacherAdminList"></div>
+    </div>
+
+    <div class="section-title">O'quvchini o'chirish</div>
+    <div class="entry-panel">
+      <div class="entry-form">
+        <div class="field">
+          <label>O'qituvchi</label>
+          <select id="admin_teacher">
+            ${DATA.teachers.map(t => `<option value="${t.teacher_id}" ${String(t.teacher_id)===String(ADMIN.teacherId)?'selected':''}>${escapeHtml(t.display_name)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field">
+          <label>Guruh</label>
+          <select id="admin_group">
+            ${groupsForTeacher.map(g => `<option value="${g.group_id}" ${String(g.group_id)===String(ADMIN.groupId)?'selected':''}>${escapeHtml(g.level)} — ${escapeHtml(g.schedule_label || g.schedule_code)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field full">
+          <label>O'quvchi</label>
+          <select id="admin_student">
+            ${studentsForGroup.map(s => `<option value="${s.student_id}" ${String(s.student_id)===String(ADMIN.studentId)?'selected':''}>${escapeHtml(s.full_name)}</option>`).join('')}
+          </select>
+        </div>
+        <button class="save" id="admin_del_student" style="background:var(--low);">O'quvchini o'chirish</button>
+        <div id="admin_student_msg" class="full"></div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('at_save').addEventListener('click', addTeacherFromAdmin);
+  document.getElementById('admin_teacher').addEventListener('change', e => {
+    ADMIN.teacherId = e.target.value; ADMIN.groupId = null; ADMIN.studentId = null; render();
+  });
+  document.getElementById('admin_group').addEventListener('change', e => {
+    ADMIN.groupId = e.target.value; ADMIN.studentId = null; render();
+  });
+  document.getElementById('admin_student').addEventListener('change', e => {
+    ADMIN.studentId = e.target.value;
+  });
+  document.getElementById('admin_del_student').addEventListener('click', deleteStudentFromAdmin);
+
+  renderTeacherAdminList();
+}
+
+async function addTeacherFromAdmin() {
+  const displayName = document.getElementById('at_name').value.trim();
+  const username = document.getElementById('at_user').value.trim();
+  const password = document.getElementById('at_pass').value.trim();
+  if (!displayName || !username || !password) {
+    return showMsg('at_msg', 'Barcha maydonlarni to\'ldiring.', true);
+  }
+  showMsg('at_msg', 'Qo\'shilmoqda...', false);
+  try {
+    const res = await apiPost({ action: 'addTeacher', username: AUTH.username, password: AUTH.password, displayName, newUsername: username, newPassword: password });
+    if (!res.success) return showMsg('at_msg', res.error || 'Xatolik yuz berdi.', true);
+    await loadData();
+    document.getElementById('at_name').value = '';
+    document.getElementById('at_user').value = '';
+    document.getElementById('at_pass').value = '';
+    showMsg('at_msg', `"${displayName}" qo'shildi. U shu login (${username}) va parol bilan kirishi mumkin.`, false);
+    renderTeacherAdminList();
+  } catch (e) {
+    showMsg('at_msg', 'Xatolik yuz berdi. Qayta urinib ko\'ring.', true);
+  }
+}
+
+function renderTeacherAdminList() {
+  const wrap = document.getElementById('teacherAdminList');
+  if (!DATA.teachers.length) {
+    wrap.innerHTML = `<div class="empty-note">Hozircha o'qituvchilar yo'q.</div>`;
+    return;
+  }
+  wrap.innerHTML = DATA.teachers.map(t => {
+    const groupCount = DATA.groups.filter(g => String(g.teacher_id) === String(t.teacher_id)).length;
+    return `
+      <div class="recent-item">
+        <span>${escapeHtml(t.display_name)} <small style="color:var(--text-muted)">(${groupCount} ta guruh)</small></span>
+        <button class="del" data-teacher-id="${t.teacher_id}" data-teacher-name="${escapeHtml(t.display_name)}">O'chirish</button>
+      </div>
+    `;
+  }).join('');
+  wrap.querySelectorAll('.del').forEach(btn => {
+    btn.addEventListener('click', () => deleteTeacherFromAdmin(btn.dataset.teacherId, btn.dataset.teacherName));
+  });
+}
+
+async function deleteTeacherFromAdmin(teacherId, teacherName) {
+  const ok = confirm(`"${teacherName}"ni o'chirmoqchimisiz? Uning barcha guruhlari, o'quvchilari va natijalari ham o'chiriladi. Bu amalni orqaga qaytarib bo'lmaydi.`);
+  if (!ok) return;
+  try {
+    const res = await apiPost({ action: 'deleteTeacher', username: AUTH.username, password: AUTH.password, teacherId });
+    if (!res.success) { alert(res.error || 'Xatolik yuz berdi.'); return; }
+    if (String(ADMIN.teacherId) === String(teacherId)) { ADMIN.teacherId = null; ADMIN.groupId = null; ADMIN.studentId = null; }
+    await loadData();
+    render();
+  } catch (e) {
+    alert('Xatolik yuz berdi. Qayta urinib ko\'ring.');
+  }
+}
+
+async function deleteStudentFromAdmin() {
+  const select = document.getElementById('admin_student');
+  const studentId = select.value;
+  const studentName = select.options[select.selectedIndex] ? select.options[select.selectedIndex].text : '';
+  if (!studentId) return;
+  const ok = confirm(`"${studentName}"ni o'chirmoqchimisiz? Uning barcha natijalari ham o'chiriladi.`);
+  if (!ok) return;
+  showMsg('admin_student_msg', 'O\'chirilmoqda...', false);
+  try {
+    const res = await apiPost({ action: 'deleteStudent', username: AUTH.username, password: AUTH.password, studentId });
+    if (!res.success) return showMsg('admin_student_msg', res.error || 'Xatolik yuz berdi.', true);
+    ADMIN.studentId = null;
+    await loadData();
+    render();
+    showMsg('admin_student_msg', "O'quvchi o'chirildi.", false);
+  } catch (e) {
+    showMsg('admin_student_msg', 'Xatolik yuz berdi. Qayta urinib ko\'ring.', true);
+  }
+}
+
+function todayStr() {
+  const d = new Date();
+  return d.toISOString().slice(0, 10);
+}
+
+function renderEntryForm() {
+  const wrap = document.getElementById('entryFormWrap');
+  if (DASH.entryTab === 'homework') {
+    wrap.innerHTML = `
+      <div class="entry-form">
+        <div class="field"><label>Sana</label><input type="date" id="ef_date" value="${todayStr()}"></div>
+        <div class="field"><label>Bajarilgan foiz (%)</label><input type="number" id="ef_percent" min="0" max="100" placeholder="masalan: 85"></div>
+        <button class="save" id="ef_save">Saqlash</button>
+        <div id="ef_msg" class="full"></div>
+      </div>
+    `;
+    document.getElementById('ef_save').addEventListener('click', async () => {
+      const date = document.getElementById('ef_date').value;
+      const percent = document.getElementById('ef_percent').value;
+      if (!date || percent === '') return showMsg('ef_msg', "Iltimos, sana va foizni kiriting.", true);
+      await saveEntry('addHomework', { studentId: DASH.studentId, date, percent });
+    });
+  } else if (DASH.entryTab === 'unit') {
+    wrap.innerHTML = `
+      <div class="entry-form">
+        <div class="field"><label>Modul nomi</label><input type="text" id="ef_unit" placeholder="masalan: Unit 5"></div>
+        <div class="field"><label>Sana</label><input type="date" id="ef_date" value="${todayStr()}"></div>
+        <div class="field"><label>Ball (0–100)</label><input type="number" id="ef_score" min="0" max="100" placeholder="masalan: 78"></div>
+        <button class="save" id="ef_save">Saqlash</button>
+        <div id="ef_msg" class="full"></div>
+      </div>
+    `;
+    document.getElementById('ef_save').addEventListener('click', async () => {
+      const unitName = document.getElementById('ef_unit').value.trim();
+      const date = document.getElementById('ef_date').value;
+      const score = document.getElementById('ef_score').value;
+      if (!unitName || !date || score === '') return showMsg('ef_msg', "Barcha maydonlarni to'ldiring.", true);
+      await saveEntry('addUnitTest', { studentId: DASH.studentId, unitName, date, score });
+    });
+  } else {
+    wrap.innerHTML = `
+      <div class="entry-form">
+        <div class="field"><label>Daraja nomi</label><input type="text" id="ef_level" placeholder="masalan: Pre-Intermediate"></div>
+        <div class="field"><label>Sana</label><input type="date" id="ef_date" value="${todayStr()}"></div>
+        <div class="field"><label>Ball (0–100)</label><input type="number" id="ef_score" min="0" max="100" placeholder="masalan: 72"></div>
+        <button class="save" id="ef_save">Saqlash</button>
+        <div id="ef_msg" class="full"></div>
+      </div>
+    `;
+    document.getElementById('ef_save').addEventListener('click', async () => {
+      const levelName = document.getElementById('ef_level').value.trim();
+      const date = document.getElementById('ef_date').value;
+      const score = document.getElementById('ef_score').value;
+      if (!levelName || !date || score === '') return showMsg('ef_msg', "Barcha maydonlarni to'ldiring.", true);
+      await saveEntry('addLevelTest', { studentId: DASH.studentId, levelName, date, score });
+    });
+  }
+}
+
+function showMsg(elId, text, isError) {
+  const el = document.getElementById(elId);
+  el.innerHTML = `<div style="color:${isError ? 'var(--low)' : 'var(--good)'};font-size:13px;font-weight:600;">${escapeHtml(text)}</div>`;
+}
+
+async function saveEntry(action, fields) {
+  showMsg('ef_msg', 'Saqlanmoqda...', false);
+  try {
+    const res = await apiPost({ action, username: AUTH.username, password: AUTH.password, ...fields });
+    if (!res.success) return showMsg('ef_msg', res.error || 'Xatolik yuz berdi.', true);
+    await loadData();
+    showMsg('ef_msg', 'Saqlandi!', false);
+    renderRecentList();
+  } catch (e) {
+    showMsg('ef_msg', 'Xatolik yuz berdi. Qayta urinib ko\'ring.', true);
+  }
+}
+
+function renderRecentList() {
+  const listEl = document.getElementById('recentList');
+  if (!listEl) return;
+  const studentIds = DATA.students.filter(s => String(s.group_id) === String(DASH.groupId)).map(s => String(s.student_id));
+
+  let items = [];
+  DATA.homework.filter(h => studentIds.includes(String(h.student_id))).forEach(h => {
+    items.push({ sheet: 'Homework', id: h.entry_id, date: h.date, label: `${studentName(h.student_id)} — Uy vazifasi: ${h.percent_completed}%` });
+  });
+  DATA.unitTests.filter(h => studentIds.includes(String(h.student_id))).forEach(h => {
+    items.push({ sheet: 'UnitTests', id: h.entry_id, date: h.date, label: `${studentName(h.student_id)} — ${h.unit_name}: ${h.score}` });
+  });
+  DATA.levelTests.filter(h => studentIds.includes(String(h.student_id))).forEach(h => {
+    items.push({ sheet: 'LevelTests', id: h.entry_id, date: h.date, label: `${studentName(h.student_id)} — Daraja (${h.level_name}): ${h.score}` });
+  });
+  items.sort((a, b) => a.date < b.date ? 1 : -1);
+  items = items.slice(0, 15);
+
+  if (!items.length) {
+    listEl.innerHTML = `<div class="empty-note">Hozircha yozuvlar yo'q.</div>`;
+    return;
+  }
+  listEl.innerHTML = items.map(it => `
+    <div class="recent-item">
+      <span>${formatDate(it.date)} · ${escapeHtml(it.label)}</span>
+      <button class="del" onclick="deleteRecent('${it.sheet}','${it.id}')">O'chirish</button>
+    </div>
+  `).join('');
+}
+
+async function deleteRecent(sheetName, entryId) {
+  if (!confirm("Ushbu yozuvni o'chirmoqchimisiz?")) return;
+  await apiPost({ action: 'deleteEntry', username: AUTH.username, password: AUTH.password, sheetName, entryId });
+  await loadData();
+  renderRecentList();
+}
+
+function studentName(studentId) {
+  const s = DATA.students.find(s => String(s.student_id) === String(studentId));
+  return s ? s.full_name : '';
+}
+
+/* =======================================================================
+   UTILS
+   ======================================================================= */
+function escapeHtml(str) {
+  return String(str ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const parts = String(dateStr).split('-');
+  if (parts.length !== 3) return dateStr;
+  return `${parts[2]}.${parts[1]}.${parts[0]}`;
+}
+
+/* =======================================================================
+   BOOT
+   ======================================================================= */
+(async function boot() {
+  try {
+    await loadData();
+    if (AUTH) goTeacherArea(); else goHome();
+  } catch (e) {
+    app.innerHTML = `<div class="empty-state">Ma'lumotlarni yuklab bo'lmadi. Internet aloqasini va sozlamalarni (CONFIG.APPS_SCRIPT_URL) tekshiring.<br><br><small>${escapeHtml(e.message)}</small></div>`;
+  }
+})();
+</script>
+</body>
+</html>
